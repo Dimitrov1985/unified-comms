@@ -28,6 +28,8 @@ app.use("/api/ai",        aiRoutes);
 // Alias — совпадает с redirect URI зарегистрированным в Google Cloud
 app.use("/auth/gmail",    gmailRoutes);
 
+app.get("/", (_req, res) => res.json({ name: "Unified Comms API", version: "1.0.0", status: "ok" }));
+
 // Health check + all connection statuses
 app.get("/api/status", (_req, res) => {
   res.json({
