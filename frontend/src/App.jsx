@@ -54,6 +54,11 @@ export default function App() {
               {filter === "payments" ? "💳 Платежи" : filter === "tokens" ? "🪙 Токены PLT" : "🎁 Награды"}
             </span>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              {web3.account && web3.chainId !== 11155111 && (
+                <span style={{ color: "#f59e0b", fontSize: 12 }}>
+                  ⚠️ Переключи MetaMask на Sepolia
+                </span>
+              )}
               {web3.account ? (
                 <>
                   <span style={styles.chip}>ETH {parseFloat(web3.balance).toFixed(4)}</span>

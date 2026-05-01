@@ -1,7 +1,7 @@
 {
-  "token": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-  "paymentProcessor": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-  "rewardSystem": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
-  "chainId": "31337",
-  "deployedAt": "2026-04-30T03:47:34.463Z"
+  "token": "0x337D3cA557CB45138c327db5206F050B56EC8C7D",
+  "paymentProcessor": "0x9A4dC8B22AD2a3E21531162767EC771e03504D27",
+  "rewardSystem": "0xc28fda79BCd2E601678634f971d5f5875375d306",
+  "chainId": "11155111",
+  "deployedAt": "2026-05-01T16:39:48.663Z"
 }
