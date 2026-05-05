@@ -26,6 +26,12 @@ body {
 
 #root { height: 100vh; display: flex; flex-direction: column; }
 
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  body { overflow: auto; height: auto; }
+  #root { height: auto; min-height: 100vh; }
+}
+
 button {
   cursor: pointer;
   font-family: inherit;
