@@ -88,7 +88,7 @@ export default function App() {
       </div>
       <div style={styles.blockchainContent}>
         {filter === "payments" && <PaymentPanel processor={web3.processor} token={web3.token} account={web3.account} onSuccess={handleSuccess} />}
-        {filter === "tokens"   && <TokenBalance tokenBal={web3.tokenBal} account={web3.account} token={web3.token} />}
+        {filter === "tokens"   && <TokenBalance tokenBal={web3.tokenBal} account={web3.account} token={web3.token} signer={web3.signer} />}
         {filter === "rewards"  && <RewardsDashboard rewardSys={web3.rewardSys} account={web3.account} onReward={handleSuccess} />}
       </div>
     </div>

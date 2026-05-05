@@ -1,6 +1,7 @@
 import React from "react";
+import TokenSwap from "./TokenSwap";
 
-export default function TokenBalance({ tokenBal, account, token }) {
+export default function TokenBalance({ tokenBal, account, token, signer }) {
   const bal = parseFloat(tokenBal || "0");
 
   const features = [
@@ -10,6 +11,7 @@ export default function TokenBalance({ tokenBal, account, token }) {
   ];
 
   return (
+    <>
     <div className="card">
       <h2 style={{ marginBottom: 4, fontSize: 18 }}>PLT Токен</h2>
       <p style={{ color: "var(--muted)", fontSize: 13, marginBottom: 20 }}>
@@ -55,6 +57,9 @@ export default function TokenBalance({ tokenBal, account, token }) {
         </p>
       )}
     </div>
+
+    <TokenSwap signer={signer} account={account} onSuccess={() => {}} />
+  </>
   );
 }
 
