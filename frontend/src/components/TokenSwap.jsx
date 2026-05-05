@@ -58,11 +58,11 @@ export default function TokenSwap({ signer, account, onSuccess }) {
         await approveTx.wait();
         await handleTx(
           saleContract.sell(pltWei),
-          () => { setMsg(`Продано! Получено ${parseFloat(amount) / RATE} ETH`); onSuccess?.(); },
-          (e) => setMsg(`Ошибка: ${e}`)
+          () => { setMsg(`Sold! Received ${parseFloat(amount) / RATE} ETH`); onSuccess?.(); },
+          (e) => setMsg(`Error: ${e}`)
         );
       } catch (e) {
-        setMsg(`Ошибка: ${e.message}`);
+        setMsg(`Error: ${e.message}`);
       }
     }
 
@@ -73,7 +73,7 @@ export default function TokenSwap({ signer, account, onSuccess }) {
 
   return (
     <div className="card" style={{ marginTop: 20 }}>
-      <h2 style={{ fontSize: 18, marginBottom: 16 }}>Обмен токенов</h2>
+      <h2 style={{ fontSize: 18, marginBottom: 16 }}>Token Swap</h2>
 
       {/* Mode selector */}
       <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
@@ -82,27 +82,27 @@ export default function TokenSwap({ signer, account, onSuccess }) {
           style={{ flex: 1 }}
           onClick={() => switchMode("buy")}
         >
-          Купить PLT
+          Buy PLT
         </button>
         <button
           className={mode === "sell" ? "btn-danger" : "btn-ghost"}
           style={{ flex: 1 }}
           onClick={() => switchMode("sell")}
         >
-          Продать PLT
+          Sell PLT
         </button>
       </div>
 
       {/* Rate info */}
       <div style={styles.rateBox}>
-        <span style={{ color: "var(--muted)", fontSize: 12 }}>Курс обмена</span>
+        <span style={{ color: "var(--muted)", fontSize: 12 }}>Exchange Rate</span>
         <span style={{ fontWeight: 600 }}>1 ETH = {RATE} PLT</span>
       </div>
 
       {/* Input */}
       <div style={{ marginTop: 16 }}>
         <div style={{ color: "var(--muted)", fontSize: 12, marginBottom: 6 }}>
-          {mode === "buy" ? "Отдаю ETH:" : "Отдаю PLT:"}
+          {mode === "buy" ? "You pay (ETH):" : "You pay (PLT):"}
         </div>
         <input
           style={styles.input}
@@ -118,7 +118,7 @@ export default function TokenSwap({ signer, account, onSuccess }) {
       {/* Output */}
       {output && (
         <div style={styles.outputBox}>
-          <span style={{ color: "var(--muted)", fontSize: 12 }}>Получу:</span>
+          <span style={{ color: "var(--muted)", fontSize: 12 }}>You receive:</span>
           <span style={{ fontWeight: 700, fontSize: 18, color: "var(--accent2)" }}>{output}</span>
         </div>
       )}
@@ -130,12 +130,12 @@ export default function TokenSwap({ signer, account, onSuccess }) {
         disabled={!account || !amount || pending || !saleContract}
         onClick={execute}
       >
-        {pending ? <span className="spinner" /> : mode === "buy" ? `Купить PLT` : `Продать PLT`}
+        {pending ? <span className="spinner" /> : mode === "buy" ? `Buy PLT` : `Sell PLT`}
       </button>
 
       {!account && (
         <p style={{ color: "var(--muted)", fontSize: 12, marginTop: 10 }}>
-          Подключите кошелёк для обмена
+          Connect your wallet to swap tokens
         </p>
       )}
 
@@ -144,8 +144,8 @@ export default function TokenSwap({ signer, account, onSuccess }) {
           marginTop: 14,
           padding: "10px 14px",
           borderRadius: 8,
-          background: msg.startsWith("Ошибка") ? "var(--danger)22" : "var(--accent2)22",
-          color:      msg.startsWith("Ошибка") ? "var(--danger)"   : "var(--accent2)",
+          background: msg.startsWith("Error") ? "var(--danger)22" : "var(--accent2)22",
+          color:      msg.startsWith("Error") ? "var(--danger)"   : "var(--accent2)",
           fontSize: 13,
         }}>
           {msg}

@@ -14,13 +14,13 @@ export default function AIPanel({ messages, summary, loading, onSummarize }) {
         disabled={loading || !messages.length}
         onClick={() => onSummarize(messages)}
       >
-        {loading ? <span className="spinner" /> : "Анализировать переписку"}
+        {loading ? <span className="spinner" /> : "Analyze Messages"}
       </button>
 
       {summary ? (
         <div style={styles.summary}>
           <div style={{ color: "var(--muted)", fontSize: 11, fontWeight: 600, marginBottom: 8, textTransform: "uppercase", letterSpacing: .5 }}>
-            Резюме
+            Summary
           </div>
           <p style={{ fontSize: 13, lineHeight: 1.7 }}>{summary}</p>
         </div>
@@ -28,7 +28,7 @@ export default function AIPanel({ messages, summary, loading, onSummarize }) {
         <div style={styles.placeholder}>
           <div style={{ fontSize: 32, marginBottom: 8 }}>✨</div>
           <div style={{ fontSize: 12, color: "var(--muted)", textAlign: "center" }}>
-            Нажмите "Анализировать" чтобы получить резюме всех сообщений
+            Click "Analyze Messages" to get an AI summary of your inbox
           </div>
         </div>
       )}
@@ -37,22 +37,22 @@ export default function AIPanel({ messages, summary, loading, onSummarize }) {
         <div style={styles.featureItem}>
           <span>📋</span>
           <div>
-            <div style={{ fontWeight: 600, fontSize: 12 }}>Авто-резюме</div>
-            <div style={{ color: "var(--muted)", fontSize: 11 }}>Краткий обзор переписки</div>
+            <div style={{ fontWeight: 600, fontSize: 12 }}>Auto Summary</div>
+            <div style={{ color: "var(--muted)", fontSize: 11 }}>Quick overview of your inbox</div>
           </div>
         </div>
         <div style={styles.featureItem}>
           <span>💡</span>
           <div>
-            <div style={{ fontWeight: 600, fontSize: 12 }}>Умные ответы</div>
-            <div style={{ color: "var(--muted)", fontSize: 11 }}>AI составит ответ за тебя</div>
+            <div style={{ fontWeight: 600, fontSize: 12 }}>Smart Replies</div>
+            <div style={{ color: "var(--muted)", fontSize: 11 }}>AI drafts replies for you</div>
           </div>
         </div>
         <div style={styles.featureItem}>
           <span>🎯</span>
           <div>
-            <div style={{ fontWeight: 600, fontSize: 12 }}>Приоритеты</div>
-            <div style={{ color: "var(--muted)", fontSize: 11 }}>Важные сообщения вперёд</div>
+            <div style={{ fontWeight: 600, fontSize: 12 }}>Priorities</div>
+            <div style={{ color: "var(--muted)", fontSize: 11 }}>Important messages first</div>
           </div>
         </div>
       </div>

@@ -3,9 +3,9 @@ import { ethers } from "ethers";
 import { handleTx } from "../utils/web3Utils";
 
 const ACHIEVEMENTS = [
-  { id: 1, icon: "🥇", name: "Первые шаги",    desc: "Выполни первый платёж" },
-  { id: 2, icon: "🤝", name: "Социальная сеть", desc: "Пригласи 5 друзей" },
-  { id: 3, icon: "🔥", name: "Верный игрок",    desc: "30 дней подряд" },
+  { id: 1, icon: "🥇", name: "First Steps",    desc: "Complete your first payment" },
+  { id: 2, icon: "🤝", name: "Social Network", desc: "Invite 5 friends" },
+  { id: 3, icon: "🔥", name: "Loyal Player",   desc: "30 days in a row" },
 ];
 
 export default function RewardsDashboard({ rewardSys, account, onReward }) {
@@ -40,20 +40,20 @@ export default function RewardsDashboard({ rewardSys, account, onReward }) {
     setMsg(null);
     await handleTx(
       rewardSys.claimDailyLogin(),
-      () => { setMsg("Ежедневный бонус получен! +2 PLT"); onReward?.(); load(); },
-      (e) => setMsg(`Ошибка: ${e}`)
+      () => { setMsg("Daily bonus claimed! +2 PLT"); onReward?.(); load(); },
+      (e) => setMsg(`Error: ${e}`)
     );
     setPending(null);
   };
 
   const register = async () => {
-    if (!ethers.isAddress(refInput)) { setMsg("Неверный адрес реферера"); return; }
+    if (!ethers.isAddress(refInput)) { setMsg("Invalid referrer address"); return; }
     setPending("ref");
     setMsg(null);
     await handleTx(
       rewardSys.registerWithReferral(refInput),
-      () => { setMsg("Зарегистрировано! Реферер получил 50 PLT"); load(); },
-      (e) => setMsg(`Ошибка: ${e}`)
+      () => { setMsg("Registered! Referrer received 50 PLT"); load(); },
+      (e) => setMsg(`Error: ${e}`)
     );
     setPending(null);
     setRefInput("");
@@ -61,20 +61,20 @@ export default function RewardsDashboard({ rewardSys, account, onReward }) {
 
   if (!account) return (
     <div className="card">
-      <p style={{ color: "var(--muted)" }}>Подключите кошелёк для просмотра наград</p>
+      <p style={{ color: "var(--muted)" }}>Connect your wallet to view rewards</p>
     </div>
   );
 
   return (
     <div className="card">
-      <h2 style={{ marginBottom: 20, fontSize: 18 }}>Награды и достижения</h2>
+      <h2 style={{ marginBottom: 20, fontSize: 18 }}>Rewards & Achievements</h2>
 
       {/* Stats row */}
       {stats && (
         <div style={styles.statsRow}>
-          <StatBox label="Заработано PLT" value={parseFloat(stats.earned).toFixed(2)} accent />
-          <StatBox label="Рефералы"       value={stats.referrals} />
-          <StatBox label="Серия дней"     value={`${stats.streak} 🔥`} />
+          <StatBox label="Earned PLT"  value={parseFloat(stats.earned).toFixed(2)} accent />
+          <StatBox label="Referrals"   value={stats.referrals} />
+          <StatBox label="Day Streak"  value={`${stats.streak} 🔥`} />
         </div>
       )}
 
@@ -88,33 +88,33 @@ export default function RewardsDashboard({ rewardSys, account, onReward }) {
         >
           {pending === "login"
             ? <span className="spinner" />
-            : canLogin ? "Получить ежедневный бонус" : "Бонус уже получен сегодня ✓"
+            : canLogin ? "Claim Daily Bonus" : "Already claimed today ✓"
           }
         </button>
       </div>
 
       {/* Referral */}
       <div style={{ marginTop: 20 }}>
-        <div style={{ fontWeight: 600, marginBottom: 8 }}>Реферальная система</div>
+        <div style={{ fontWeight: 600, marginBottom: 8 }}>Referral System</div>
         <div style={{ display: "flex", gap: 8 }}>
           <input
             style={styles.input}
-            placeholder="Адрес реферера (0x…)"
+            placeholder="Referrer address (0x…)"
             value={refInput}
             onChange={(e) => setRefInput(e.target.value)}
           />
           <button className="btn-primary" disabled={pending === "ref"} onClick={register}>
-            {pending === "ref" ? <span className="spinner" /> : "Зарегистрироваться"}
+            {pending === "ref" ? <span className="spinner" /> : "Register"}
           </button>
         </div>
         <p style={{ color: "var(--muted)", fontSize: 12, marginTop: 6 }}>
-          Реферер получит 50 PLT за каждого приглашённого
+          Referrer receives 50 PLT for each invited user
         </p>
       </div>
 
       {/* Achievements */}
       <div style={{ marginTop: 24 }}>
-        <div style={{ fontWeight: 600, marginBottom: 12 }}>Достижения</div>
+        <div style={{ fontWeight: 600, marginBottom: 12 }}>Achievements</div>
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {ACHIEVEMENTS.map((a) => (
             <div key={a.id} style={{
@@ -127,7 +127,7 @@ export default function RewardsDashboard({ rewardSys, account, onReward }) {
                 <div style={{ color: "var(--muted)", fontSize: 12 }}>{a.desc}</div>
               </div>
               {achievements[a.id]
-                ? <span className="badge badge-green">Разблокировано</span>
+                ? <span className="badge badge-green">Unlocked</span>
                 : <span className="badge badge-purple">100 PLT</span>
               }
             </div>
@@ -140,8 +140,8 @@ export default function RewardsDashboard({ rewardSys, account, onReward }) {
           marginTop: 16,
           padding: "10px 14px",
           borderRadius: 8,
-          background: msg.startsWith("Ошибка") ? "var(--danger)22" : "var(--accent2)22",
-          color:      msg.startsWith("Ошибка") ? "var(--danger)"   : "var(--accent2)",
+          background: msg.startsWith("Error") ? "var(--danger)22" : "var(--accent2)22",
+          color:      msg.startsWith("Error") ? "var(--danger)"   : "var(--accent2)",
           fontSize: 13,
         }}>
           {msg}

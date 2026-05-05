@@ -10,9 +10,9 @@ export const fmtToken = (val, decimals = 2) =>
   parseFloat(ethers.formatEther(val)).toFixed(decimals);
 
 export const SERVICE_LABELS = {
-  1: { name: "Доп. хранилище",    icon: "💾" },
-  2: { name: "Премиум на месяц",   icon: "⭐" },
-  3: { name: "Премиум на год",     icon: "🏆" },
+  1: { name: "Extra Storage",   icon: "💾" },
+  2: { name: "Premium Monthly", icon: "⭐" },
+  3: { name: "Premium Yearly",  icon: "🏆" },
 };
 
 export const ETH_PRICES = {

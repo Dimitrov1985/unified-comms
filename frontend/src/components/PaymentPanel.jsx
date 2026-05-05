@@ -19,8 +19,8 @@ export default function PaymentPanel({ processor, token, account, onSuccess }) {
       const price = ethers.parseEther(ETH_PRICES[serviceId]);
       ok = await handleTx(
         processor.payWithETH(serviceId, { value: price }),
-        () => setTxMsg(`Оплата через ETH успешна!`),
-        (e) => setTxMsg(`Ошибка: ${e}`)
+        () => setTxMsg(`ETH payment successful!`),
+        (e) => setTxMsg(`Error: ${e}`)
       );
     } else {
       // Approve first, then pay
@@ -30,11 +30,11 @@ export default function PaymentPanel({ processor, token, account, onSuccess }) {
         await approveTx.wait();
         ok = await handleTx(
           processor.payWithToken(serviceId),
-          () => setTxMsg(`Оплата токенами PLT успешна!`),
-          (e) => setTxMsg(`Ошибка: ${e}`)
+          () => setTxMsg(`PLT token payment successful!`),
+          (e) => setTxMsg(`Error: ${e}`)
         );
       } catch (e) {
-        setTxMsg(`Ошибка approve: ${e.message}`);
+        setTxMsg(`Approval error: ${e.message}`);
       }
     }
 
@@ -44,7 +44,7 @@ export default function PaymentPanel({ processor, token, account, onSuccess }) {
 
   return (
     <div className="card">
-      <h2 style={{ marginBottom: 20, fontSize: 18 }}>Оплата сервисов</h2>
+      <h2 style={{ marginBottom: 20, fontSize: 18 }}>Pay for Services</h2>
 
       {/* Mode selector */}
       <div style={styles.modeBar}>
@@ -60,7 +60,7 @@ export default function PaymentPanel({ processor, token, account, onSuccess }) {
           style={{ flex: 1 }}
           onClick={() => setPayMode("token")}
         >
-          PLT Токены
+          PLT Tokens
         </button>
       </div>
 
@@ -82,7 +82,7 @@ export default function PaymentPanel({ processor, token, account, onSuccess }) {
                 disabled={!account || pending === id}
                 onClick={() => pay(id)}
               >
-                {pending === id ? <span className="spinner" /> : "Купить"}
+                {pending === id ? <span className="spinner" /> : "Buy"}
               </button>
             </div>
           );
@@ -94,8 +94,8 @@ export default function PaymentPanel({ processor, token, account, onSuccess }) {
           marginTop: 16,
           padding: "10px 14px",
           borderRadius: 8,
-          background: txMsg.startsWith("Ошибка") ? "var(--danger)22" : "var(--accent2)22",
-          color:      txMsg.startsWith("Ошибка") ? "var(--danger)"   : "var(--accent2)",
+          background: txMsg.startsWith("Error") ? "var(--danger)22" : "var(--accent2)22",
+          color:      txMsg.startsWith("Error") ? "var(--danger)"   : "var(--accent2)",
           fontSize: 13,
         }}>
           {txMsg}
@@ -104,7 +104,7 @@ export default function PaymentPanel({ processor, token, account, onSuccess }) {
 
       {!account && (
         <p style={{ color: "var(--muted)", fontSize: 13, marginTop: 14 }}>
-          Подключите кошелёк для оплаты
+          Connect your wallet to make payments
         </p>
       )}
     </div>

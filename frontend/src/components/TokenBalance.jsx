@@ -5,17 +5,17 @@ export default function TokenBalance({ tokenBal, account, token, signer }) {
   const bal = parseFloat(tokenBal || "0");
 
   const features = [
-    { label: "Доп. хранилище",  required: 100,  icon: "💾" },
-    { label: "Премиум-доступ",  required: 500,  icon: "⭐" },
-    { label: "VIP-статус",      required: 1000, icon: "👑" },
+    { label: "Extra Storage",   required: 100,  icon: "💾" },
+    { label: "Premium Access",  required: 500,  icon: "⭐" },
+    { label: "VIP Status",      required: 1000, icon: "👑" },
   ];
 
   return (
     <>
     <div className="card">
-      <h2 style={{ marginBottom: 4, fontSize: 18 }}>PLT Токен</h2>
+      <h2 style={{ marginBottom: 4, fontSize: 18 }}>PLT Token</h2>
       <p style={{ color: "var(--muted)", fontSize: 13, marginBottom: 20 }}>
-        Используйте токены для разблокировки функций платформы
+        Use tokens to unlock platform features
       </p>
 
       {/* Balance display */}
@@ -36,7 +36,7 @@ export default function TokenBalance({ tokenBal, account, token, signer }) {
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5, fontSize: 13 }}>
                 <span>{f.icon} {f.label}</span>
                 <span style={{ color: unlocked ? "var(--accent2)" : "var(--muted)" }}>
-                  {unlocked ? "Разблокировано ✓" : `${bal.toFixed(0)} / ${f.required} PLT`}
+                  {unlocked ? "Unlocked ✓" : `${bal.toFixed(0)} / ${f.required} PLT`}
                 </span>
               </div>
               <div style={styles.track}>
@@ -53,7 +53,7 @@ export default function TokenBalance({ tokenBal, account, token, signer }) {
 
       {!account && (
         <p style={{ color: "var(--muted)", fontSize: 13, marginTop: 16 }}>
-          Подключите кошелёк для просмотра баланса
+          Connect your wallet to view balance
         </p>
       )}
     </div>

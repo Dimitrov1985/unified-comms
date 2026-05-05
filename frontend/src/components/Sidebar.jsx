@@ -1,16 +1,16 @@
 import React from "react";
 
 const SOURCES = [
-  { id: "all",       label: "Все",       icon: "💬" },
+  { id: "all",       label: "All",       icon: "💬" },
   { id: "gmail",     label: "Gmail",     icon: "✉️"  },
   { id: "slack",     label: "Slack",     icon: "💼" },
   { id: "whatsapp",  label: "WhatsApp",  icon: "📱" },
 ];
 
 const BLOCKCHAIN = [
-  { id: "payments",  label: "Платежи",   icon: "💳" },
-  { id: "tokens",    label: "Токены",    icon: "🪙" },
-  { id: "rewards",   label: "Награды",   icon: "🎁" },
+  { id: "payments",  label: "Payments",  icon: "💳" },
+  { id: "tokens",    label: "Tokens",    icon: "🪙" },
+  { id: "rewards",   label: "Rewards",   icon: "🎁" },
 ];
 
 export default function Sidebar({ filter, setFilter, statuses, counts, onRefresh }) {
@@ -22,7 +22,7 @@ export default function Sidebar({ filter, setFilter, statuses, counts, onRefresh
       </div>
 
       <nav style={{ flex: 1 }}>
-        <div style={styles.sectionLabel}>Сообщения</div>
+        <div style={styles.sectionLabel}>Messages</div>
         {SOURCES.map((s) => (
           <button
             key={s.id}
@@ -42,7 +42,7 @@ export default function Sidebar({ filter, setFilter, statuses, counts, onRefresh
           </button>
         ))}
 
-        <div style={{ ...styles.sectionLabel, marginTop: 16 }}>Блокчейн</div>
+        <div style={{ ...styles.sectionLabel, marginTop: 16 }}>Blockchain</div>
         {BLOCKCHAIN.map((s) => (
           <button
             key={s.id}
@@ -63,7 +63,7 @@ export default function Sidebar({ filter, setFilter, statuses, counts, onRefresh
       {/* Service status */}
       <div style={styles.statusBlock}>
         <div style={{ color: "var(--muted)", fontSize: 11, marginBottom: 8, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>
-          Подключения
+          Connections
         </div>
         {[
           { key: "gmail",    label: "Gmail",    icon: "✉️"  },
@@ -84,7 +84,7 @@ export default function Sidebar({ filter, setFilter, statuses, counts, onRefresh
       </div>
 
       <button className="btn-ghost" style={{ margin: "12px", fontSize: 12 }} onClick={onRefresh}>
-        ↻ Обновить
+        ↻ Refresh
       </button>
     </div>
   );

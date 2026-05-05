@@ -66,7 +66,7 @@ export default function App() {
     <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
       <div style={styles.walletBar}>
         <span style={{ color: "var(--muted)", fontSize: 13 }}>
-          {filter === "payments" ? "💳 Платежи" : filter === "tokens" ? "🪙 Токены PLT" : "🎁 Награды"}
+          {filter === "payments" ? "💳 Payments" : filter === "tokens" ? "🪙 PLT Tokens" : "🎁 Rewards"}
         </span>
         <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
           {web3.account && web3.chainId !== 11155111 && (
@@ -77,7 +77,7 @@ export default function App() {
               <span style={styles.chip}>ETH {parseFloat(web3.balance).toFixed(3)}</span>
               <span style={{ ...styles.chip, color: "var(--green)" }}>PLT {parseFloat(web3.tokenBal).toFixed(1)}</span>
               <span style={styles.chip}>🟢 {web3.account.slice(0,4)}…{web3.account.slice(-3)}</span>
-              <button className="btn-ghost" style={{ fontSize: 11, padding: "3px 8px" }} onClick={web3.disconnect}>Выйти</button>
+              <button className="btn-ghost" style={{ fontSize: 11, padding: "3px 8px" }} onClick={web3.disconnect}>Disconnect</button>
             </>
           ) : (
             <button className="btn-primary" style={{ fontSize: 12 }} disabled={web3.loading} onClick={web3.connectMetaMask}>
@@ -130,7 +130,7 @@ export default function App() {
             {selected && mobileView === "detail" ? (
               <div style={{ flex: 1 }}>
                 <button style={styles.backBtn} onClick={() => { setMobileView("list"); setSelected(null); }}>
-                  ← Назад
+                  ← Back
                 </button>
                 <MessageDetail
                   msg={selected}
@@ -141,14 +141,14 @@ export default function App() {
               </div>
             ) : mobileView === "ai" ? (
               <div style={{ flex: 1, padding: 16 }}>
-                <button style={styles.backBtn} onClick={() => setMobileView("list")}>← Назад</button>
+                <button style={styles.backBtn} onClick={() => setMobileView("list")}>← Back</button>
                 <AIPanel messages={messages} summary={summary} loading={aiLoading} onSummarize={summarize} />
               </div>
             ) : (
               <div style={{ flex: 1 }}>
                 <div style={styles.listHeader}>
                   <span style={{ fontWeight: 600, fontSize: 14 }}>
-                    {filter === "all" ? "Все сообщения" : filter.charAt(0).toUpperCase() + filter.slice(1)}
+                    {filter === "all" ? "All Messages" : filter.charAt(0).toUpperCase() + filter.slice(1)}
                   </span>
                   <div style={{ display: "flex", gap: 8 }}>
                     <span style={{ color: "var(--muted)", fontSize: 12 }}>{messages.length}</span>
@@ -160,7 +160,7 @@ export default function App() {
                 ) : messages.length === 0 ? (
                   <div style={styles.center}>
                     <div style={{ fontSize: 40, marginBottom: 10 }}>📭</div>
-                    <div style={{ color: "var(--muted)", fontSize: 13 }}>Нет сообщений</div>
+                    <div style={{ color: "var(--muted)", fontSize: 13 }}>No messages</div>
                   </div>
                 ) : (
                   messages.map((m) => (
@@ -185,9 +185,9 @@ export default function App() {
           <div style={styles.list}>
             <div style={styles.listHeader}>
               <span style={{ fontWeight: 600 }}>
-                {filter === "all" ? "Все сообщения" : filter.charAt(0).toUpperCase() + filter.slice(1)}
+                {filter === "all" ? "All Messages" : filter.charAt(0).toUpperCase() + filter.slice(1)}
               </span>
-              <span style={{ color: "var(--muted)", fontSize: 12 }}>{messages.length} сообщений</span>
+              <span style={{ color: "var(--muted)", fontSize: 12 }}>{messages.length} messages</span>
             </div>
             <div style={styles.listBody}>
               {loading ? (
@@ -195,7 +195,7 @@ export default function App() {
               ) : messages.length === 0 ? (
                 <div style={styles.center}>
                   <div style={{ fontSize: 40, marginBottom: 10 }}>📭</div>
-                  <div style={{ color: "var(--muted)", fontSize: 13 }}>Нет сообщений</div>
+                  <div style={{ color: "var(--muted)", fontSize: 13 }}>No messages</div>
                 </div>
               ) : (
                 messages.map((m) => (

@@ -9,11 +9,11 @@ export default function MessageDetail({ msg, onReply, onGenerateReply, onClose }
   if (!msg) return (
     <div style={styles.empty}>
       <div style={{ fontSize: 48, marginBottom: 12 }}>💬</div>
-      <div style={{ color: "var(--muted)" }}>Выберите сообщение</div>
+      <div style={{ color: "var(--muted)" }}>Select a message</div>
     </div>
   );
 
-  const time = new Date(msg.timestamp).toLocaleString("ru-RU");
+  const time = new Date(msg.timestamp).toLocaleString("en-US");
 
   const handleGenerate = async () => {
     setGenerating(true);
@@ -43,9 +43,9 @@ export default function MessageDetail({ msg, onReply, onGenerateReply, onClose }
       {/* Header */}
       <div style={styles.header}>
         <div>
-          <div style={{ fontWeight: 700, fontSize: 15 }}>{msg.subject || msg.channel || "Сообщение"}</div>
+          <div style={{ fontWeight: 700, fontSize: 15 }}>{msg.subject || msg.channel || "Message"}</div>
           <div style={{ color: "var(--muted)", fontSize: 12, marginTop: 2 }}>
-            От: {msg.from} · {time}
+            From: {msg.from} · {time}
           </div>
         </div>
         <button className="btn-ghost" style={{ fontSize: 18, padding: "4px 10px" }} onClick={onClose}>✕</button>
@@ -59,27 +59,27 @@ export default function MessageDetail({ msg, onReply, onGenerateReply, onClose }
       {/* Reply */}
       <div style={styles.replyBox}>
         <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-          <span style={{ color: "var(--muted)", fontSize: 13, fontWeight: 600 }}>Ответить</span>
+          <span style={{ color: "var(--muted)", fontSize: 13, fontWeight: 600 }}>Reply</span>
           <button
             className="btn-ghost"
             style={{ fontSize: 12, padding: "3px 10px", marginLeft: "auto" }}
             disabled={generating}
             onClick={handleGenerate}
           >
-            {generating ? <span className="spinner" /> : "🤖 AI ответ"}
+            {generating ? <span className="spinner" /> : "🤖 AI Reply"}
           </button>
         </div>
         <textarea
           style={styles.textarea}
-          placeholder="Введите ответ..."
+          placeholder="Type your reply..."
           value={replyText}
           onChange={(e) => setReplyText(e.target.value)}
           rows={4}
         />
         <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 8 }}>
-          {sent && <span style={{ color: "var(--green)", fontSize: 12, marginRight: 12, alignSelf: "center" }}>✓ Отправлено</span>}
+          {sent && <span style={{ color: "var(--green)", fontSize: 12, marginRight: 12, alignSelf: "center" }}>✓ Sent</span>}
           <button className="btn-primary" disabled={!replyText.trim() || sending} onClick={handleSend}>
-            {sending ? <span className="spinner" /> : "Отправить"}
+            {sending ? <span className="spinner" /> : "Send"}
           </button>
         </div>
       </div>
